@@ -12,8 +12,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "create": "node core/create-bem-api.js",
-    "add": "node core/add.js"
+    "create": "node core/create-bem-api.js"
   },
   "eslintConfig": {
     "extends": "react-app"
