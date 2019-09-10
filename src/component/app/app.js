@@ -9,10 +9,9 @@ export default class App extends Component {
   render() {
 
     const todoData = [
-      {label: 'List item 1', important: 'badge-info'},
-      {label: 'List item 2'},
-      {label: 'List item 3', important: 'badge-danger'},
-      {label: 'List item 4', important: 'badge-info'},
+      { label: 'Нужно выпить кофе', important: 'badge-info'},
+      { label: 'Создать приложение', important: 'badge-warning'},
+      { label: 'Пойти на обед', important: 'badge-info'}
     ];
 
     return (

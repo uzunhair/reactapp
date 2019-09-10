@@ -6,15 +6,15 @@ export default class List extends Component {
 
   render() {
 
-    const todos = this.props.todos;
+    const { todos } = this.props;
+
+    const numbers = [1, 4, 9];
+    const roots = numbers.map(Math.sqrt);
 
     return (
       <div className="card">
         <ul className="list-group list-group-flush">
-          <ListItem
-            label={todos[0].label}
-            important={todos[0].important}
-          />
+          {roots}
           <ListItem
             label={todos[1].label}
             important={todos[1].important}
