@@ -7,15 +7,36 @@ import Statistics from '../statistics';
 
 export default class App extends Component {
 
-  render() {
-
-    const todoData = [
+  state = {
+    todoData: [
       { id:1, label: 'Нужно выпить кофе'},
       { id:2, label: 'Создать приложение'},
       { id:3, label: 'Пойти на обед'},
       { id:4, label: 'Выйти на работу'},
       { id:5, label: 'Пойти домой'}
-    ];
+    ]
+  };
+
+  deletedItem = (id) => {
+    this.setState( ({todoData}) => {
+
+      const idx = todoData.findIndex( (el) => el.id === id);
+
+      const newTodoData = [
+        ...todoData.splice(0, idx),
+        ...todoData.slice(idx + 1)
+      ];
+
+      return {
+        todoData: newTodoData
+      }
+
+    });
+  };
+
+  render() {
+
+    const { todoData } = this.state;
 
     return (
       <div className="App py-5">
@@ -27,7 +48,7 @@ export default class App extends Component {
           <Add/>
           <List
             todos={todoData}
-            onDeleted={ (id) => console.log('Deleted', id)}
+            onDeleted={ this.deletedItem }
           />
         </div>
       </div>
