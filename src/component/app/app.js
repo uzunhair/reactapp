@@ -10,11 +10,11 @@ export default class App extends Component {
   render() {
 
     const todoData = [
-      { id:1, label: 'Нужно выпить кофе', important: 'badge-info'},
-      { id:2, label: 'Создать приложение', important: 'badge-warning'},
-      { id:3, label: 'Пойти на обед', important: 'badge-info'},
-      { id:4, label: 'Выйти на работу', important: 'badge-info'},
-      { id:5, label: 'Пойти домой', important: 'badge-danger'}
+      { id:1, label: 'Нужно выпить кофе'},
+      { id:2, label: 'Создать приложение'},
+      { id:3, label: 'Пойти на обед'},
+      { id:4, label: 'Выйти на работу'},
+      { id:5, label: 'Пойти домой'}
     ];
 
     return (

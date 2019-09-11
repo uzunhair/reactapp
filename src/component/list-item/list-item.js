@@ -7,50 +7,69 @@ export default class ListItem extends Component {
 
     this.state = {
       disable: false,
-      urgency: false
+      important: false
     };
 
     this.onlabelClick = () => {
-      this.setState({
-        disable: true
+      this.setState (({disable}) => {
+        return {
+          disable: !disable
+        }
       })
     };
 
-    this.onUrgency = () => {
-      this.setState({
-        urgency: true
-      })
+    this.onImportant = () => {
+      // this.setState(({important}) => {
+      //   return {
+      //     important: !important
+      //   }
+      // })
+      this.setState(({important}) => ( { important: !important }) )
     }
   }
 
   render() {
-    const { label, important = 'badge-success' } = this.props;
-    const { disable,  urgency} = this.state;
-    let badgeClass = `badge ${important} mr-2 p-2`;
+    const { label } = this.props;
+    const { disable, important = "badge badge-outline-secondary mr-2 p-2"} = this.state;
 
-    let listClass ='list-group-item d-flex align-items-center';
+    let badgeClassBase = `badge mr-2 p-2 badge-outline-`;
+    let badgeClass = `${badgeClassBase}secondary`;
+    let labelClass = "mr-auto";
+
     if(disable) {
-      listClass += ' disabled';
-      badgeClass = 'badge badge-secondary mr-2 p-2'
+      labelClass = 'text-muted mr-auto text-line-through';
     }
 
-    if(urgency) {
-      badgeClass = "badge badge-danger mr-2 p-2"
+    if(important) {
+      badgeClass = `${badgeClassBase}warning`
     }
 
     return (
-      <li className={listClass}>
-        <div
-          className={badgeClass}
-          onClick={this.onUrgency}> </div>
-        <div
-          className="mr-auto cursor-pointer"
-          onClick={this.onlabelClick}>
+      <li className="list-group-item d-flex align-items-center">
+
+        <label
+          className="custom-control custom-checkbox mb-0 pl-4"
+          onChange={this.onlabelClick}>
+
+          <input type="checkbox" className="custom-control-input" />
+          <span className="custom-control-label"></span>
+
+        </label>
+
+        <div className={labelClass}>
           {label}
         </div>
-        <button className="ml-auto btn btn-sm btn-danger">
+
+        <div
+          className={badgeClass}
+          onClick={this.onImportant}>
+          <i className="fa fa-exclamation-triangle"></i>
+        </div>
+
+        <button className="ml-3 btn btn-sm btn-danger">
           <i className="fa fa-trash-alt fa-fw"></i>
         </button>
+
       </li>
     )
   }
