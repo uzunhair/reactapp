@@ -7,9 +7,9 @@ export default class List extends Component {
   render() {
 
     const { todos } = this.props;
-    const elements = todos.map((item) => {
+    const elements = todos.map(({id, ...itemProps}) => {
       return (
-        <ListItem {...item} />
+        <ListItem key={id} {...itemProps} />
       )
     });
 
