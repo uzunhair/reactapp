@@ -22,15 +22,7 @@ export default class App extends Component {
   deletedItem = (id) => {
     this.setState( ({todoData}) => {
 
-      const idx = todoData.findIndex( (el) => el.id === id);
-
-      const newTodoData = [
-        ...todoData.splice(0, idx),
-        ...todoData.slice(idx + 1)
-      ];
-
-      console.log(todoData);
-      console.log(newTodoData);
+      const newTodoData = todoData.filter(todo => todo.id !== id);
 
       return {
         todoData: newTodoData

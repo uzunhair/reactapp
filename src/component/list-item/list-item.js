@@ -24,6 +24,7 @@ export default class ListItem extends Component {
       //     important: !important
       //   }
       // })
+      // Сокращенная запись
       this.setState(({important}) => ( { important: !important }) )
     }
   }
