@@ -25,7 +25,10 @@ export default class App extends Component {
             <Filter/>
           </div>
           <Add/>
-          <List todos={todoData} />
+          <List
+            todos={todoData}
+            onDeleted={ (id) => console.log('Deleted', id)}
+          />
         </div>
       </div>
     )

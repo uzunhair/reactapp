@@ -29,7 +29,7 @@ export default class ListItem extends Component {
   }
 
   render() {
-    const { label } = this.props;
+    const { label, onDeleted } = this.props;
     const { disable, important = "badge badge-outline-secondary mr-2 p-2"} = this.state;
 
     let badgeClassBase = `badge mr-2 p-2 badge-outline-`;
@@ -66,7 +66,11 @@ export default class ListItem extends Component {
           <i className="fa fa-exclamation-triangle"></i>
         </div>
 
-        <button className="ml-3 btn btn-sm btn-danger">
+        <button
+          type="button"
+          className="ml-3 btn btn-sm btn-danger"
+          onClick={onDeleted}
+        >
           <i className="fa fa-trash-alt fa-fw"></i>
         </button>
 

@@ -6,10 +6,14 @@ export default class List extends Component {
 
   render() {
 
-    const { todos } = this.props;
+    const { todos, onDeleted } = this.props;
     const elements = todos.map(({id, ...itemProps}) => {
       return (
-        <ListItem key={id} {...itemProps} />
+        <ListItem
+          key={id}
+          {...itemProps}
+          onDeleted={() => onDeleted(id)}
+        />
       )
     });
 
