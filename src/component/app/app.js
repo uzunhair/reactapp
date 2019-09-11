@@ -7,6 +7,8 @@ import Statistics from '../statistics';
 
 export default class App extends Component {
 
+  minId = 100;
+
   state = {
     todoData: [
       { id:1, label: 'Нужно выпить кофе'},
@@ -27,11 +29,37 @@ export default class App extends Component {
         ...todoData.slice(idx + 1)
       ];
 
+      console.log(todoData);
+      console.log(newTodoData);
+
       return {
         todoData: newTodoData
       }
 
     });
+  };
+
+  addItem = (value) => {
+
+    const newItem = {
+      id: this.minId++,
+      label: value
+    };
+
+    this.setState(({todoData}) => {
+
+      const newTodoData = [
+        ...todoData,
+        newItem
+      ];
+
+      console.log(newTodoData, value);
+
+      return {
+        todoData: newTodoData
+      }
+
+    })
   };
 
   render() {
@@ -45,7 +73,9 @@ export default class App extends Component {
             <Statistics/>
             <Filter/>
           </div>
-          <Add/>
+          <Add
+            onAdd={ this.addItem }
+          />
           <List
             todos={todoData}
             onDeleted={ this.deletedItem }
