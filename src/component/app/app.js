@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import Add from '../add';
 import List from '../list';
@@ -29,7 +29,7 @@ export default class App extends Component {
   };
 
   deletedItem = (id) => {
-    this.setState( ({todoData}) => {
+    this.setState(({todoData}) => {
 
       const newTodoData = todoData.filter(todo => todo.id !== id);
 
@@ -42,7 +42,7 @@ export default class App extends Component {
 
   addItem = (value) => {
 
-    if(value) {
+    if (value) {
       const newItem = this.createitem(value);
 
       this.setState(({todoData}) => {
@@ -69,7 +69,7 @@ export default class App extends Component {
 
     this.setState(({todoData}) => {
 
-      const idx = todoData.findIndex( (el) => el.id === id);
+      const idx = todoData.findIndex((el) => el.id === id);
 
       const oldItem = todoData[idx];
       const newItem = {
@@ -92,9 +92,9 @@ export default class App extends Component {
   onToggleDone = (id) => {
     console.log('onToggleDone', id);
 
-    this.setState( ({todoData}) => {
+    this.setState(({todoData}) => {
 
-      const idx = todoData.findIndex( (el) => el.id === id);
+      const idx = todoData.findIndex((el) => el.id === id);
       const oldItem = todoData[idx];
       const newItem = {
         ...oldItem,
@@ -116,26 +116,30 @@ export default class App extends Component {
 
   render() {
 
-    const { todoData } = this.state;
+    const {todoData} = this.state;
 
     return (
-      <div className="App py-5">
-        <div className="container-fluid w-50">
-          <div className="mb-4 d-flex justify-content-between align-items-center">
-            <Statistics
-              onAllItems={todoData.length}
-            />
-            <Filter/>
+      <div className="App pt-3 py-lg-5">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-lg-6">
+              <div className="mb-4 d-lg-flex justify-content-between align-items-center">
+                <Statistics
+                  onAllItems={todoData.length}
+                />
+                <Filter/>
+              </div>
+              <Add
+                onAdd={this.addItem}
+              />
+              <List
+                todos={todoData}
+                onDeleted={this.deletedItem}
+                onToggleImportant={this.onToggleImportant}
+                onToggleDone={this.onToggleDone}
+              />
+            </div>
           </div>
-          <Add
-            onAdd={ this.addItem }
-          />
-          <List
-            todos={todoData}
-            onDeleted={ this.deletedItem }
-            onToggleImportant={this.onToggleImportant}
-            onToggleDone={this.onToggleDone}
-          />
         </div>
       </div>
     )
