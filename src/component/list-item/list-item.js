@@ -2,47 +2,17 @@ import React, { Component } from 'react';
 
 export default class ListItem extends Component {
 
-  constructor() {
-    super();
-
-    this.state = {
-      disable: false,
-      important: false
-    };
-
-    this.onlabelClick = () => {
-      this.setState (({disable}) => {
-        return {
-          disable: !disable
-        }
-      })
-    };
-
-    this.onImportant = () => {
-      // this.setState(({important}) => {
-      //   return {
-      //     important: !important
-      //   }
-      // })
-      // Сокращенная запись
-      this.setState(({important}) => ( { important: !important }) )
-    }
-  }
-
   render() {
-    const { label, onDeleted } = this.props;
-    const { disable, important = "badge badge-outline-secondary mr-2 p-2"} = this.state;
+    const { label, done, important, onDeleted, onToggleImportant, onToggleDone } = this.props;
 
-    let badgeClassBase = `badge mr-2 p-2 badge-outline-`;
-    let badgeClass = `${badgeClassBase}secondary`;
+    const badgeClassBase = `badge mr-2 p-2 badge-outline-`;
+    const badgeClassSecondary = `${badgeClassBase}secondary`;
+    const badgeClass = important ? `${badgeClassBase}warning` : badgeClassSecondary;
+
     let labelClass = "mr-auto";
 
-    if(disable) {
+    if(done) {
       labelClass = 'text-muted mr-auto text-line-through';
-    }
-
-    if(important) {
-      badgeClass = `${badgeClassBase}warning`
     }
 
     return (
@@ -50,9 +20,9 @@ export default class ListItem extends Component {
 
         <label
           className="custom-control custom-checkbox mb-0 pl-4"
-          onChange={this.onlabelClick}>
+          onChange={onToggleDone}>
 
-          <input type="checkbox" className="custom-control-input" />
+          <input type="checkbox" className="custom-control-input" defaultChecked={done} />
           <span className="custom-control-label"></span>
 
         </label>
@@ -63,7 +33,7 @@ export default class ListItem extends Component {
 
         <div
           className={badgeClass}
-          onClick={this.onImportant}>
+          onClick={onToggleImportant}>
           <i className="fa fa-exclamation-triangle"></i>
         </div>
 

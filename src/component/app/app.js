@@ -9,13 +9,22 @@ export default class App extends Component {
 
   minId = 100;
 
+  createitem(label, done = false, important = false) {
+    return {
+      label,
+      id: this.minId++,
+      done: done,
+      important: important
+    }
+  };
+
   state = {
     todoData: [
-      { id:1, label: 'Нужно выпить кофе'},
-      { id:2, label: 'Создать приложение'},
-      { id:3, label: 'Пойти на обед'},
-      { id:4, label: 'Выйти на работу'},
-      { id:5, label: 'Пойти домой'}
+      this.createitem("Нужно выпить кофе"),
+      this.createitem("Создать приложение"),
+      this.createitem("Пойти на обед", true),
+      this.createitem("Выйти на работу", false, true),
+      this.createitem("Пойти домой")
     ]
   };
 
@@ -33,25 +42,55 @@ export default class App extends Component {
 
   addItem = (value) => {
 
-    const newItem = {
-      id: this.minId++,
-      label: value
-    };
+    if(value) {
+      const newItem = this.createitem(value);
+
+      this.setState(({todoData}) => {
+
+        const newTodoData = [
+          ...todoData,
+          newItem
+        ];
+
+        console.log(newTodoData, value);
+
+        return {
+          todoData: newTodoData
+        }
+
+      })
+    } else {
+      console.warn('Введите название события')
+    }
+  };
+
+  onToggleImportant = (id) => {
+    console.log('onToggleImportant', id);
 
     this.setState(({todoData}) => {
 
-      const newTodoData = [
-        ...todoData,
-        newItem
+      const idx = todoData.findIndex( (el) => el.id === id);
+
+      const oldItem = todoData[idx];
+      const newItem = {
+        ...oldItem,
+        important: !oldItem.important
+      };
+
+      const newArray = [
+        ...todoData.slice(0, idx),
+        newItem,
+        ...todoData.slice(idx + 1),
       ];
 
-      console.log(newTodoData, value);
-
       return {
-        todoData: newTodoData
+        todoData: newArray
       }
-
     })
+  };
+
+  onToggleDone = (id) => {
+    console.log('onToggleDone', id)
   };
 
   render() {
@@ -62,7 +101,9 @@ export default class App extends Component {
       <div className="App py-5">
         <div className="container-fluid w-50">
           <div className="mb-4 d-flex justify-content-between align-items-center">
-            <Statistics/>
+            <Statistics
+              onAllItems={todoData.length}
+            />
             <Filter/>
           </div>
           <Add
@@ -71,6 +112,8 @@ export default class App extends Component {
           <List
             todos={todoData}
             onDeleted={ this.deletedItem }
+            onToggleImportant={this.onToggleImportant}
+            onToggleDone={this.onToggleDone}
           />
         </div>
       </div>

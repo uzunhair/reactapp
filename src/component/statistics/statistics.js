@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const Statistics = () => {
-  return (
-    <div className="statistics h4 mb-0 font-weight-light text-secondary">
-      Всего элементов <span className="text-dark">{5}</span>, завершено <span className="text-dark">{3}</span>
-    </div>
-  )
+export default class Statistics extends Component {
+
+  render() {
+
+    const { onAllItems, itemsDone} = this.props;
+
+    return (
+      <div className="statistics h4 mb-0 font-weight-light text-secondary">
+        Всего элементов <span className="text-dark">{onAllItems}</span>, завершено <span className="text-dark">{itemsDone}</span>
+      </div>
+    )
+  }
 };
-
-export default Statistics;
