@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import Add from '../add';
+import TodoList from '../todolist';
+
 
 export default class App extends Component {
 
@@ -13,8 +16,8 @@ export default class App extends Component {
                 Statistics
                 Filter
               </div>
-              Add
-              List
+              <Add />
+              <TodoList />
             </div>
           </div>
         </div>
