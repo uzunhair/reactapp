@@ -1,9 +1,18 @@
-import styled from 'styled-components';
-
-const Add = styled.div`
-  background-color: red;
-  width: 10px;
-  height: 100px;
-`;
+const Add = ()=> {
+    return (
+        <div className="card mb-4">
+            <form action="" className="card-body">
+                <div className="form-row">
+                    <div className="col">
+                        <input type="text" className="form-control" placeholder="Add new item..." />
+                    </div>
+                    <div className="col-auto">
+                        <button type="button" className="btn btn-primary">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    )
+}
 
 export default Add;
